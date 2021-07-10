@@ -29,7 +29,7 @@ router.post("/login", (req,res) =>{
 
 // user create
 router.post("/create", (req,res) => {
-    console.log("user/create");
+    console.log("/user/create");
     User.create(
         req.body.name,
         req.body.userId,

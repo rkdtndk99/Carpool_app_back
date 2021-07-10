@@ -35,4 +35,16 @@ router.get("/:tableId", (req, res) => {
     });
 });
 
+router.delete("/delete", (req, res) => {
+    console.log("/table/delete")
+    console.log(req.body)
+    Table.deleteOne(
+        req.body.name,
+        req.body.tableId,
+        (item) => {
+        console.log(item)
+        res.status(200).json(item)
+    });
+});
+
 module.exports = router;

@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const userRouter = require('./src/routes/user');
 const tableRouter = require('./src/routes/table');
 const clubRouter = require('./src/routes/club');
+const commentRouter = require('./src/routes/comment');
 
 const dbURL = 'mongodb://localhost:27017/clubDB'
 // 익스프레스 객체 생성
@@ -42,6 +43,7 @@ app.get('/', (req, res) => {
 app.use('/user', userRouter);
 app.use('/table', tableRouter);
 app.use('/club', clubRouter);
+app.use('/comment', commentRouter);
 
 // Express 서버 시작
 http.createServer(app).listen(app.get('port'), function(){

@@ -35,8 +35,16 @@ function getOne(id, callback) {
 
 }
 
+function deleteOne(name, id, callback) {
+    console.log(id);
+    TableModel.findOneAndDelete({"name": name, "_id": id}, (result) => {
+        callback(result);
+    })
+}
+
 module.exports = {
     create,
     getAll,
-    getOne
+    getOne,
+    deleteOne
 };
