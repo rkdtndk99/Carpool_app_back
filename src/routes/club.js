@@ -1,10 +1,11 @@
 const express = require("express");
-const db = require("../../database/clubdb");
+const Club = require("../../database/clubdb");
 const router = express.Router();
 
+// club create
 router.post("/create", (req, res) => {
     console.log("/club/create");
-    db.create(
+    Club.create(
         req.body.clubOwner,
         req.body.clubName,
         req.body.clubDesc,
@@ -14,9 +15,10 @@ router.post("/create", (req, res) => {
     );
 });
 
+// club get All
 router.get("/", (req, res) => {
     console.log("/club/");
-    db.getAll((item) => {
+    Club.getAll((item) => {
         console.log(item)
         res.json(item)
     });

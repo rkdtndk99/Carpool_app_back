@@ -1,9 +1,11 @@
 /*Test API의 라우터와 요청을 처리하는 로직 */
 const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
-    name: String,
+    name: String, // kakao
     userId: String,
-    password: String
+    email: String, // kakao
+    password: String,
+    clubName: String
 });
 
 const UserModel = mongoose.model("user", UserSchema);

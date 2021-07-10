@@ -2,15 +2,18 @@
 
 const TableModel = require("../src/models/table");
 
-function create(name, title, content, callback) {
+function create(name, title, content, email, clubName, callback) {
 
     const newTable = new TableModel({
         name: name,
         title: title,
-        content: content
+        content: content,
+        email: email,
+        clubName: clubName
     });
+    console.log(newTable);
 
-    newTable.save(newTable, (err, item) => {
+    newTable.save((err, item) => {
         console.log(item);
         callback(item);
     });
@@ -18,7 +21,15 @@ function create(name, title, content, callback) {
 
 function getAll(callback) {
     
-    TableModel.find({}, (error,result) => {
+    TableModel.find({}, (err, result) => {
+        callback(result);
+    });
+
+}
+
+function getOne(id, callback) {
+
+    TableModel.findById(id, (err, result) => {
         callback(result);
     });
 
@@ -26,5 +37,6 @@ function getAll(callback) {
 
 module.exports = {
     create,
-    getAll
+    getAll,
+    getOne
 };

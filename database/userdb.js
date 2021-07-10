@@ -13,31 +13,62 @@ function login(id, pwd, callback) {
     });   
 }
 
-function create(name, userId, password, callback) {
+function create(name, userId, email, password, callback) {
 
     const newUser = new userModel({
         name: name,
         userId: userId,
-        password: password
+        email: email,
+        password: password,
+        clubName: null
     });
 
     userModel.findOne({userId: userId}, (err, result) => {
 
-        if (result.length == 0) {
-            newUser.save(newUser, (err, item) => {
-                console.log('a');
-                console.log(item);
+        if (result == null) {
+            newUser.save((err, item) => {
                 callback(item);
             });
         } else {
-            console.log('B');
-            console.log(result);
-            callback(result);
+            callback();
         }
+    })
+}
+
+function kakao_create(name, email, callback){
+
+    const newUser = new userModel({
+        name: name,
+        email: email
+    })
+
+    newUser.save((err, item) => {
+        console.log(item);
+        callback(item);
+    });
+}
+
+function getAll(callback) {
+    
+    userModel.find({}, (err,result) => {
+        callback(result);
+    });
+
+}
+
+function joinClub(cname, uname, callback) {
+    console.log(cname);
+    console.log(uname);
+    userModel.updateOne({name: uname}, {$set: {clubName: cname}}, (err, result) => {
+        console.log(result);
+        callback(result)
     })
 }
 
 module.exports = {
     login,
-    create
+    create,
+    kakao_create,
+    getAll,
+    joinClub
 };
