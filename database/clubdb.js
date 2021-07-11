@@ -24,7 +24,15 @@ function getAll(callback) {
 
 }
 
+function deleteOne(owner, id, callback) {
+    console.log(id);
+    ClubModel.findOneAndDelete({"clubOwner": owner, "_id": id}, (result) => {
+        callback(result);
+    })
+}
+
 module.exports = {
     create,
-    getAll
+    getAll,
+    deleteOne
 };
