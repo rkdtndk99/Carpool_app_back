@@ -42,9 +42,24 @@ function deleteOne(name, id, callback) {
     })
 }
 
+function changeOne(filter, update, callback) {
+    console.log('updateOne0')
+    TableModel.findOneAndUpdate(
+        filter, 
+        update, 
+        {
+            new: true
+        },
+        (result) => {
+            callback(result);
+        }
+    );
+}
+
 module.exports = {
     create,
     getAll,
     getOne,
-    deleteOne
+    deleteOne,
+    changeOne
 };

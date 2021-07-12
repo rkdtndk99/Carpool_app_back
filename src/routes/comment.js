@@ -51,4 +51,30 @@ router.delete("/delete", (req, res) => {
     });
 });
 
+router.put("/update", (req, res) => {
+    console.log("/comment/update")
+    console.log(req.body)
+    
+
+    const filter = { 
+        name: req.body.name, 
+        _id: req.body.id, 
+    };
+    const update = { 
+        content: req.body.content 
+    };
+    CommentModel.find(filter, (err, item) => {
+        console.log(item);
+        if (item == null) res.status(200).send();
+        Comment.changeOne(
+            filter,
+            update,
+            (result) => {
+                res.status(200).send();
+            }
+        );
+    })
+
+});
+
 module.exports = router;

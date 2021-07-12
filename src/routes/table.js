@@ -59,4 +59,28 @@ router.delete("/delete", (req, res) => {
     });
 });
 
+router.put("/update", (req, res) => {
+    console.log("/table/update")
+    
+    const filter = { 
+        name: req.body.name, 
+        _id: req.body.id, 
+    };
+    const update = { 
+        title: req.body.title, 
+        content: req.body.content 
+    };
+
+    Table.changeOne(
+        filter,
+        update,
+        (result) => {
+            console.log(result);
+            if (result == null) res.status(400).send();
+            res.status(200).send();
+        }
+    );
+
+});
+
 module.exports = router;

@@ -33,8 +33,23 @@ function deleteOne(name, id, callback) {
     })
 }
 
+function changeOne(filter, update, callback) {
+    console.log('updateOne0')
+    CommentModel.findOneAndUpdate(
+        filter, 
+        update, 
+        {
+            new: true
+        },
+        (result) => {
+            callback(result);
+        }
+    );
+}
+
 module.exports = {
     create,
     getComment,
-    deleteOne
+    deleteOne,
+    changeOne
 };
