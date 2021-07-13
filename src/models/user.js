@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
     userId: String,
     email: String, // kakao
     password: String,
-    clubName: String
+    birth: String
 });
 
 const UserModel = mongoose.model("user", UserSchema);

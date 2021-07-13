@@ -5,8 +5,6 @@ const TableSchema = new mongoose.Schema({
     name: String, // 사용자 구분
     title: String,
     content: String,
-    email: String, // 사용자 구분
-    clubName: String,
     updated: {type: Date, default: Date.now}
 });
 

@@ -8,7 +8,9 @@ const userRouter = require('./src/routes/user');
 const tableRouter = require('./src/routes/table');
 const clubRouter = require('./src/routes/club');
 const commentRouter = require('./src/routes/comment');
-const photoRouter = require('./src/routes/photo');
+
+
+const SocketServer = require('websocket').server
 
 const dbURL = 'mongodb://localhost:27017/clubDB'
 // 익스프레스 객체 생성
@@ -47,9 +49,37 @@ app.use('/user', userRouter);
 app.use('/table', tableRouter);
 app.use('/club', clubRouter);
 app.use('/comment', commentRouter);
-app.use('/photo', photoRouter);
 
 // Express 서버 시작
-http.createServer(app).listen(app.get('port'), function(){
-    console.log(app.get('port') + "에서 express 실행 중");
-});
+// http.createServer(app).listen(app.get('port'), function(){
+//     console.log(app.get('port') + "에서 express 실행 중");
+// });
+
+const server = http.createServer(app);
+
+server.listen(80, ()=>{
+    console.log("Listening on port 80...")
+})
+
+wsServer = new SocketServer({httpServer:server})
+
+const connections = []
+
+wsServer.on('request', (req) => {
+    const connection = req.accept()
+    console.log('new connection')
+    connections.push(connection)
+
+    connection.on('message', (mes) => {
+        connections.forEach(element => {
+            if (element != connection)
+                element.sendUTF(mes.utf8Data)
+        })
+    })
+
+    connection.on('close', (resCode, des) => {
+        console.log('connection closed')
+        connections.splice(connections.indexOf(connection), 1)
+    })
+
+})

@@ -13,16 +13,17 @@ function login(id, pwd, callback) {
     });   
 }
 
-function create(name, userId, email, password, callback) {
+function create(name, userId, email, password, birth, callback) {
 
     const newUser = new userModel({
         name: name,
         userId: userId,
         email: email,
         password: password,
-        clubName: null
+        birth: birth
     });
 
+    // userId 같으면 생성 불가
     userModel.findOne({userId: userId}, (err, result) => {
 
         if (result == null) {
@@ -35,11 +36,12 @@ function create(name, userId, email, password, callback) {
     })
 }
 
-function kakao_create(name, email, callback){
+function kakao_create(name, email, birth, callback){
 
     const newUser = new userModel({
         name: name,
-        email: email
+        email: email,
+        birth: birth
     })
 
     newUser.save((err, item) => {
@@ -49,26 +51,30 @@ function kakao_create(name, email, callback){
 }
 
 function getAll(callback) {
-    
     userModel.find({}, (err,result) => {
         callback(result);
     });
-
 }
 
-function joinClub(cname, uname, callback) {
-    console.log(cname);
-    console.log(uname);
-    userModel.updateOne({name: uname}, {$set: {clubName: cname}}, (err, result) => {
-        console.log(result);
+function getUser(id, callback) {
+    userModel.findById(id, (err, result) => {
         callback(result)
     })
 }
+
+// function joinClub(cname, uname, callback) {
+//     console.log(cname);
+//     console.log(uname);
+//     userModel.updateOne({name: uname}, {$set: {clubName: cname}}, (err, result) => {
+//         console.log(result);
+//         callback(result)
+//     })
+// }
 
 module.exports = {
     login,
     create,
     kakao_create,
     getAll,
-    joinClub
+    getUser
 };

@@ -9,10 +9,7 @@ router.post("/create", (req, res) => {
         req.body.name,
         req.body.title,
         req.body.content,
-        req.body.email,
-        req.body.clubName,
         (result) => {
-            // console.log(result);
             res.status(200).send()
         }
     );
