@@ -23,13 +23,11 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/mytable", (req, res) => {
+router.post("/mytable", (req, res) => {
     console.log("/table/mytable")
-    console.log(req.body);
     Table.getMyTable(
         req.body.name,
         (item) => {
-        console.log(item)
         res.status(200).json(item)
     });
 });
@@ -72,7 +70,7 @@ router.put("/update", (req, res) => {
     
     const filter = { 
         name: req.body.name, 
-        _id: req.body.id, 
+        _id: req.body.tableId, 
     };
     const update = { 
         title: req.body.title, 

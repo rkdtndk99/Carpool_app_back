@@ -26,7 +26,6 @@ function getAll(callback) {
 function getMyTable(name, callback) {
     
     TableModel.find({"name": name}, (err, result) => {
-        console.log(result);
         callback(result);
     });
 }

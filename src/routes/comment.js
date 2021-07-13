@@ -27,13 +27,11 @@ router.post("/", (req, res) => {
     });
 });
 
-router.get("/mycomment", (req, res) => {
+router.post("/mycomment", (req, res) => {
     console.log("/comment/mycomment")
-    console.log(req.body);
     Comment.getMyComment(
         req.body.name,
         (item) => {
-        console.log(item)
         res.status(200).json(item)
     });
 });
