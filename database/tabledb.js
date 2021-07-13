@@ -23,12 +23,12 @@ function getAll(callback) {
 
 }
 
-function getMyTable(callback) {
+function getMyTable(name, callback) {
     
-    TableModel.find({}, (err, result) => {
+    TableModel.find({"name": name}, (err, result) => {
+        console.log(result);
         callback(result);
     });
-
 }
 
 function getOne(id, callback) {
@@ -63,6 +63,7 @@ function changeOne(filter, update, callback) {
 module.exports = {
     create,
     getAll,
+    getMyTable,
     getOne,
     deleteOne,
     changeOne

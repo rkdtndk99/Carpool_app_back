@@ -27,6 +27,17 @@ router.post("/", (req, res) => {
     });
 });
 
+router.get("/mycomment", (req, res) => {
+    console.log("/comment/mycomment")
+    console.log(req.body);
+    Comment.getMyComment(
+        req.body.name,
+        (item) => {
+        console.log(item)
+        res.status(200).json(item)
+    });
+});
+
 router.delete("/delete", (req, res) => {
     console.log("/comment/delete")
     CommentModel.find({"name": req.body.name, "_id": req.body.commentId}, (err, result) => {

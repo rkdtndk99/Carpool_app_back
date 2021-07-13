@@ -26,6 +26,14 @@ function getComment(tid, callback) {
 
 }
 
+function getMyComment(name, callback) {
+    
+    CommentModel.find({"name": name}, (err, result) => {
+        console.log(result);
+        callback(result);
+    });
+}
+
 function deleteOne(name, id, callback) {
     console.log(id);
     CommentModel.findOneAndDelete({"name": name, "_id": id}, (err, result) => {
@@ -50,6 +58,7 @@ function changeOne(filter, update, callback) {
 module.exports = {
     create,
     getComment,
+    getMyComment,
     deleteOne,
     changeOne
 };

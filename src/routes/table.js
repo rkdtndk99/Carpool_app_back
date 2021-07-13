@@ -25,8 +25,11 @@ router.get("/", (req, res) => {
 
 router.get("/mytable", (req, res) => {
     console.log("/table/mytable")
-    Table.getMyTable((item) => {
-        // console.log(item)
+    console.log(req.body);
+    Table.getMyTable(
+        req.body.name,
+        (item) => {
+        console.log(item)
         res.status(200).json(item)
     });
 });
