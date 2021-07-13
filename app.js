@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRouter = require('./src/routes/user');
 const tableRouter = require('./src/routes/table');
-const clubRouter = require('./src/routes/club');
 const commentRouter = require('./src/routes/comment');
 
 
@@ -47,7 +46,6 @@ app.get('/', (req, res) => {
 //router 연결
 app.use('/user', userRouter);
 app.use('/table', tableRouter);
-app.use('/club', clubRouter);
 app.use('/comment', commentRouter);
 
 // Express 서버 시작

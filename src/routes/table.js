@@ -23,6 +23,14 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/mytable", (req, res) => {
+    console.log("/table/mytable")
+    Table.getMyTable((item) => {
+        // console.log(item)
+        res.status(200).json(item)
+    });
+});
+
 router.get("/:tableId", (req, res) => {
     console.log("/table/tableId")
     Table.getOne(

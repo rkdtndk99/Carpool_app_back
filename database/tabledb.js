@@ -23,6 +23,14 @@ function getAll(callback) {
 
 }
 
+function getMyTable(callback) {
+    
+    TableModel.find({}, (err, result) => {
+        callback(result);
+    });
+
+}
+
 function getOne(id, callback) {
 
     TableModel.findById(id, (err, result) => {
